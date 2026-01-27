@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1a1a2e">
+    <meta name="theme-color" content="#6c63ff">
+    <meta name="description" content="A two-stage timer for focused work sessions and flow state">
     <title>Flow State Timer</title>
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRmxvdyBTdGF0ZSBUaW1lciIsInNob3J0X25hbWUiOiJGbG93IFRpbWVyIiwiZGVzY3JpcHRpb24iOiJBIHR3by1zdGFnZSB0aW1lciBmb3IgZm9jdXNlZCB3b3JrIHNlc3Npb25zIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxYTFhMmUiLCJ0aGVtZV9jb2xvciI6IiMxYTFhMmUiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ2NpcmNsZSBjeD0nNTAnIGN5PSc1MCcgcj0nNDUnIGZpbGw9JyM2YzYzZmYnLyUzRSUzQ3RleHQgeD0nNTAlMjcgeT0nNTUlMjcgZm9udC1zaXplPSc0MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nd2hpdGUnIGZvbnQtZmFtaWx5PSdBcmlhbCclM0UlRjAlOUYlOTQlQTUlM0MvdGV4dCUzRSUzQy9zdmclM0UiLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
     <style>
         * {
             margin: 0;
@@ -212,7 +214,6 @@
             transform: none !important;
         }
 
-        /* Soft Reminder */
         .soft-reminder {
             position: fixed;
             top: 0;
@@ -236,7 +237,6 @@
             50% { opacity: 0.6; }
         }
 
-        /* Strong Reminder */
         .strong-reminder {
             position: fixed;
             top: 0;
@@ -340,153 +340,9 @@
     </div>
 
     <audio id="alertSound" preload="auto">
-        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwPUKng7bllHAU2jdXxz3gqBSh+zPLaizsKElyx6OyrWBUIRp/h8r9vIAUsgs/y2Ik2Bxlpu+/mnk4ND0+o4e22Yx0GNYzU8c94KgUofM3y2oo8ChJbtujsrFgWCEee4PK/cCEGK4DN8tmJNgcZabzy5p5PDg9QqOHstWMdBTWM1PHPeCkFKXzM8tmLOwoSW7bm7KxYFQdHnuDyv3AhBSuBzvLaiTYIGmm78uaeTw4OT6jh7LVjHQU0jNTyz3krBSh8zfPai
-
-TsKElyx6OyrWBUIR57g8sFwIQUrgc/y2Yk2BxlovPLlnk8OD0+o4ey1Yx0FNYvU8s94KwUofM3z2os6ChFbsOjrrFgVCEef4fK/cCEFKoDP8tqKNgcZaLzy5p5PDg9PqODstWMdBTSL1PLPeisGKHzN89qLOgoSW7Do66xYFQhHnuHzwHAhBSqBz/Laijg" type="audio/wav">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwPUKng7bllHAU2jdXxz3gqBSh+zPLaizsKElyx6OyrWBUIRp/h8r9vIAUsgs/y2Ik2Bxlpu+/mnk4ND0+o4e22Yx0GNYzU8c94KgUofM3y2oo8ChJbtujsrFgWCEee4PK/cCEGK4DN8tmJNgcZabzy5p5PDg9QqOHstWMdBTWM1PHPeCkFKXzM8tmLOwoSW7bm7KxYFQdHnuDyv3AhBSuBzvLaiTYIGmm78uaeTw4OT6jh7LVjHQU0jNTyz3krBSh8zfPaiTsKElyx6OyrWBUIR57g8sFwIQUrgc/y2Yk2BxlovPLlnk8OD0+o4ey1Yx0FNYvU8s94KwUofM3z2os6ChFbsOjrrFgVCEef4fK/cCEFKoDP8tqKNgcZaLzy5p5PDg9PqODstWMdBTSL1PLPeisGKHzN89qLOgoSW7Do66xYFQhHnuHzwHAhBSqBz/Laijg" type="audio/wav">
     </audio>
 
-    <script>
-        let standardTime = 25;
-        let flowTime = 90;
-        let totalSeconds = standardTime * 60;
-        let countdown;
-        let timerState = 'idle'; // idle, standard, grace, flow
-        let graceTimeout;
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-
-        function setStandardTimer(minutes) {
-            if (timerState !== 'idle') return;
-            standardTime = minutes;
-            totalSeconds = minutes * 60;
-            updateDisplay();
-            updateActiveButton('standard', minutes);
-        }
-
-        function setFlowTimer(minutes) {
-            if (timerState !== 'idle') return;
-            flowTime = minutes;
-            updateActiveButton('flow', minutes);
-        }
-
-        function updateActiveButton(type, minutes) {
-            const section = type === 'standard' ? 0 : 1;
-            const buttons = document.querySelectorAll('.timer-section')[section].querySelectorAll('.preset-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent === `${minutes}m`) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        function updateDisplay() {
-            const mins = Math.floor(totalSeconds / 60);
-            const secs = totalSeconds % 60;
-            document.getElementById('timeDisplay').textContent = 
-                `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        }
-
-        function startTimer() {
-            if (timerState === 'grace') {
-                clearTimeout(graceTimeout);
-                document.getElementById('softReminder').classList.remove('active');
-                startFlowTimer();
-                return;
-            }
-
-            if (timerState !== 'idle') return;
-
-            timerState = 'standard';
-            document.getElementById('timerLabel').textContent = 'Standard Timer';
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('resetBtn').disabled = false;
-            disablePresetButtons(true);
-
-            countdown = setInterval(() => {
-                totalSeconds--;
-                updateDisplay();
-
-                if (totalSeconds <= 0) {
-                    clearInterval(countdown);
-                    onStandardComplete();
-                }
-            }, 1000);
-        }
-
-        function onStandardComplete() {
-            timerState = 'grace';
-            document.getElementById('softReminder').classList.add('active');
-            document.getElementById('timerLabel').textContent = 'Time for a break?';
-            document.getElementById('startBtn').textContent = 'Continue';
-            document.getElementById('startBtn').disabled = false;
-
-            graceTimeout = setTimeout(() => {
-                document.getElementById('softReminder').classList.remove('active');
-                startFlowTimer();
-            }, 10000);
-        }
-
-        function startFlowTimer() {
-            timerState = 'flow';
-            const remainingMinutes = flowTime - standardTime;
-            totalSeconds = remainingMinutes * 60;
-            updateDisplay();
-            document.getElementById('timerLabel').textContent = 'Flow State Timer';
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('startBtn').textContent = 'Start';
-
-            countdown = setInterval(() => {
-                totalSeconds--;
-                updateDisplay();
-
-                if (totalSeconds <= 0) {
-                    clearInterval(countdown);
-                    onFlowComplete();
-                }
-            }, 1000);
-        }
-
-        function onFlowComplete() {
-            document.getElementById('strongReminder').classList.add('active');
-            document.getElementById('alertSound').play().catch(e => console.log('Audio play failed:', e));
-            timerState = 'complete';
-        }
-
-        function resetTimer() {
-            clearInterval(countdown);
-            clearTimeout(graceTimeout);
-            timerState = 'idle';
-            totalSeconds = standardTime * 60;
-            updateDisplay();
-            document.getElementById('softReminder').classList.remove('active');
-            document.getElementById('strongReminder').classList.remove('active');
-            document.getElementById('timerLabel').textContent = 'Ready to focus';
-            document.getElementById('startBtn').disabled = false;
-            document.getElementById('startBtn').textContent = 'Start';
-            document.getElementById('resetBtn').disabled = true;
-            disablePresetButtons(false);
-        }
-
-        function disablePresetButtons(disabled) {
-            document.querySelectorAll('.preset-btn').forEach(btn => {
-                btn.disabled = disabled;
-                btn.style.cursor = disabled ? 'not-allowed' : 'pointer';
-                btn.style.opacity = disabled ? '0.5' : '1';
-            });
-        }
-
-        updateDisplay();
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
