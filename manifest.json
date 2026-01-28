@@ -2,7 +2,7 @@
   "name": "Flow State Timer",
   "short_name": "Flow Timer",
   "description": "A two-stage timer for focused work sessions and flow state",
-  "start_url": "/",
+  "start_url": "/FlowTimer/",
   "display": "standalone",
   "background_color": "#1a1a2e",
   "theme_color": "#6c63ff",

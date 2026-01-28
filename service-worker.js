@@ -1,11 +1,11 @@
 const CACHE_NAME = 'flow-timer-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png'
+  '/FlowTimer/',
+  '/FlowTimer/index.html',
+  '/FlowTimer/app.js',
+  '/FlowTimer/manifest.json',
+  '/FlowTimer/icon-192.png',
+  '/FlowTimer/icon-512.png'
 ];
 
 // Install service worker and cache files
